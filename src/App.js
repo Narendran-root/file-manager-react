@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import FileUpload from './components/FileUpload';
+import AddItem from './components/AddItem';
+import ItemList from './components/ItemList';
+import ItemDetail from './components/ItemDetail';
+import styles from './style.module.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <nav className={styles.nav}>
+        <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')}>
+          File Upload
+        </NavLink>
+        <NavLink to="/array" className={({ isActive }) => (isActive ? 'active' : '')}>
+          Array Management
+        </NavLink>
+        <NavLink to="/list" className={({ isActive }) => (isActive ? 'active' : '')}>
+          List
+        </NavLink>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<FileUpload />} />
+        <Route path="/array" element={<AddItem />} />
+        <Route path="/list" element={<ItemList />} />
+        <Route path="/item/:id" element={<ItemDetail />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
